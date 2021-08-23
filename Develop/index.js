@@ -15,7 +15,7 @@ const questions = [{
 },{
     type: 'input',
     message: 'Enter Table of Contents items',
-    name: 'tableOfContents'
+    name: 'toc'
 },{
     type: 'input',
     message: 'Enter installation instructions',
@@ -43,10 +43,51 @@ const questions = [{
 }];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+const writeReadMe = ({title, description, toc}) => 
+`
+## ${title}
+## Description
+${description}
+## Table of contents
+${toc}`
+
+function writeToFile (res){
+    const tocList = res.toc.split(',').map((item, i) => `${i+1} ${item}\n`).join('')
+    ['one', 'two', 'three']
+    ['- one', '- two', '-three']
+    ` -one 
+        -two
+        -three`
+   return `
+    ## ${res.title}
+    ## Description
+    ${res.description}
+    ## Table of contents
+    ${tocList}
+    
+    <li>toc item1</li>
+    <li>toc item2</li>
+    <li>toc item3</li>`
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    iq.prompt(questions)
+    .then(function(response){
+        console.log(response)
+        const filename = response.title
+        console.log(filename)
+
+        //fs function to write file
+        fs.writeFile(`README.md`, writeToFile(response), function(err){
+            if (err) return console.log(err);
+            console.log('success')
+        })
+
+
+    })
+}
+
 
 // Function call to initialize app
 init();
