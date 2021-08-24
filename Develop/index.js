@@ -62,7 +62,7 @@ const questions = [
         message: 'enter installation instructions',
         when (answers) {
             let validate = 'Installation'
-            return answers.sections && includes(validate)
+            return answers.sections && answers.sections.includes(validate)
         }
     },{
         type: 'input',
@@ -70,16 +70,16 @@ const questions = [
         message: 'enter usage instructions',
         when (answers) {
             let validate = 'Usage'
-            return answers.sections && includes(validate)
+            return answers.sections && answers.sections.includes(validate)
         }
     },{
-        type: 'Checkbox',
+        type: 'checkbox',
         name: 'license',
         message: 'which license would you like to use?',
         choices: ['MIT', 'Apache 2.0', 'Mozilla Public 2.0', 'CDDL'],
         when (answers) {
             let validate = 'License'
-            return answers.sections && includes(validate)
+            return answers.sections && answers.sections.includes(validate)
         }
     },{
         type: 'input',
@@ -87,7 +87,7 @@ const questions = [
         message: 'enter contributor name(s)',
         when (answers) {
             let validate = 'Contributing'
-            return answers.sections && includes(validate)
+            return answers.sections && answers.sections.includes(validate)
         }
     },{
         type: 'input',
@@ -95,7 +95,7 @@ const questions = [
         message: 'enter testing methods used',
         when (answers) {
             let validate = 'Tests'
-            return answers.sections && includes(validate)
+            return answers.sections && answers.sections.includes(validate)
         }
     },{
         type: 'input',
@@ -103,7 +103,7 @@ const questions = [
         message: 'enter github username',
         when (answers) {
             let validate = 'Questions'
-            return answers.sections && includes(validate)
+            return answers.sections && answers.sections.includes(validate)
         }
     },{
         type: 'input',
@@ -111,7 +111,7 @@ const questions = [
         message: 'enter your email address',
         when  (answers) {
             let validate = 'Questions'
-            return answers.sections && includes(validate)
+            return answers.sections && answers.sections.includes(validate)
         }
 
     }
