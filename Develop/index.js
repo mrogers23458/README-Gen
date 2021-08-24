@@ -62,7 +62,7 @@ const questions = [
         message: 'enter installation instructions',
         when (answers) {
             let validate = 'Installation'
-            return answers.sections.includes(validate)
+            return answers.sections && includes(validate)
         }
     },{
         type: 'input',
@@ -70,7 +70,7 @@ const questions = [
         message: 'enter usage instructions',
         when (answers) {
             let validate = 'Usage'
-            return answers.sections.includes(validate)
+            return answers.sections && includes(validate)
         }
     },{
         type: 'Checkbox',
@@ -79,7 +79,7 @@ const questions = [
         choices: ['MIT', 'Apache 2.0', 'Mozilla Public 2.0', 'CDDL'],
         when (answers) {
             let validate = 'License'
-            return answers.sections.includes(validate)
+            return answers.sections && includes(validate)
         }
     },{
         type: 'input',
@@ -87,7 +87,7 @@ const questions = [
         message: 'enter contributor name(s)',
         when (answers) {
             let validate = 'Contributing'
-            return answers.sections.includes(validate)
+            return answers.sections && includes(validate)
         }
     },{
         type: 'input',
@@ -95,7 +95,7 @@ const questions = [
         message: 'enter testing methods used',
         when (answers) {
             let validate = 'Tests'
-            return answers.sections.includes(validate)
+            return answers.sections && includes(validate)
         }
     },{
         type: 'input',
@@ -103,7 +103,7 @@ const questions = [
         message: 'enter github username',
         when (answers) {
             let validate = 'Questions'
-            return answers.sections.includes(validate)
+            return answers.sections && includes(validate)
         }
     },{
         type: 'input',
@@ -111,7 +111,7 @@ const questions = [
         message: 'enter your email address',
         when  (answers) {
             let validate = 'Questions'
-            return answers.sections.includes(validate)
+            return answers.sections && includes(validate)
         }
 
     }
@@ -123,12 +123,15 @@ const promptUser = function(){
 } 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
+    fs.writeFile(`${fileName}`, generateMarkdown(data), function(err){
+        if (err) return console.log(err)
+    })
 }
 
 // TODO: Create a function to initialize app
 function init() {
     promptUser()
-        .then((answers) => writeToFile('README.md', generateMarkdown(answers)))
+        .then((answers) => writeToFile('README.md', answers))
         .then(() => console.log('successfully wrote to README.md'))
         .catch((err) => console.log(err));
 }
