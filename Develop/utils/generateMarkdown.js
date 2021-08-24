@@ -19,10 +19,10 @@ function renderLicenseLink(license) {}
 function renderLicenseSection(license) {}
 //function to render Descript with helper
 function renderDescription(res){
-  const descList = res.tech
-  const desArray = descList.map((item, i) => `${i+1}. ${item}\n`).join('')
+  const desList = res.tech
+  const desArray = desList.map((item, i) => `${i+1}. ${item}\n`).join('')
 
-  console.log(descList)
+  console.log(desList)
   console.log(desArray)
 
   return `Technology used
@@ -32,10 +32,22 @@ ${res.function}
 ## Challenges 
 ${res.challenges}`
 }
+//function to render table of contents
+function renderTable(res){
+  const tableSections = res.sections
+  const tableArray = tableSections.map((item, i) => `${i+1}. [${item}](#${item})\n`).join('')
+  console.log(tableArray)
+
+  return `## Table of contents
+${tableArray}`
+}
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   var useToc;
-  if (data.table)
+  if (data.table){
+    useToc = renderTable(data) 
+  } else {useToc = ''}
+
   var newDesc;
   if (data.helper){
     newDesc = renderDescription(data)
@@ -43,6 +55,7 @@ function generateMarkdown(data) {
 
 
   return `# ${data.title}
+${useToc}
 ## Description
 ${newDesc}`;
 }
