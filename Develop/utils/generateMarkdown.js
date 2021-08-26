@@ -35,7 +35,8 @@ function renderInstall (res) {
   return useInstall
   
 }
-//function to render Descript with helper
+
+//function to render Description with helper
 function renderDescription(res){
   const desList = res.tech
   const desArray = desList.map((item, i) => `${i+1}. ${item}\n`).join('')
@@ -50,17 +51,24 @@ ${res.function}
 ## Challenges 
 ${res.challenges}`
 }
-//function to render table of contents
-function renderTable(res){
-  const tableSections = res.sections
-  const tableArray = tableSections.map((item, i) => `${i+1}. [${item}](#${item})\n`).join('')
-  console.log(tableArray)
 
-  return `## Table of contents
+//new function to render table of contents
+//if no table of contents selected return an empty string
+function renderTableOfContents(res){
+
+  if(res.table){
+    const tableSections = res.sections
+    const tableArray = tableSections.map((item, i) => `${i+1}. [${item}](#${item})\n`).join('')
+
+    return `## Table of contents
 ${tableArray}`
+  } else {
+    return ''
+  }
 }
 
 //function to render usage section
+//if there is no usage section return an empty string
 function renderUsage(res) {
   let useUsage;
   if (res.usage){
@@ -76,6 +84,7 @@ function renderUsage(res) {
 }
 
 //function to render contributing section
+//if there is no contributing section return an empty string
 function renderContributing(res){
   let useContributing;
   if (res.contributing){
@@ -90,6 +99,7 @@ function renderContributing(res){
   return `${useContributing}`
 }
 //function to render tests section
+//if there is not tests section return an empty string
 function renderTests(res){
   let useTests;
   if (res.tests){
@@ -104,6 +114,7 @@ function renderTests(res){
   return `${useTests}`
 }
 //function to render questions section
+//if there is no tests section return and empty string
 function renderQuestions(res){
   let useQuestions;
   if(res.questionsGit || res.questionsEmail){
@@ -119,10 +130,10 @@ function renderQuestions(res){
 
  //function to generate markdown for README
 function generateMarkdown(data) {
-  var useToc;
+/*   var useToc;
   if (data.table){
     useToc = renderTable(data) 
-  } else {useToc = ''}
+  } else {useToc = ''} */
 
   var newDesc;
   if (data.helper){
@@ -138,15 +149,17 @@ function generateMarkdown(data) {
     badge = ''
   }
 
+  const includeTableOfContents = renderTableOfContents(data)
   const includeInstallData = renderInstall(data)
   const includeUsage = renderUsage(data)
   const includeContributing = renderContributing(data)
   const includeTests = renderTests(data)
   const includeQuestions = renderQuestions(data)
   
+//${useToc}
 
-  return `# ${data.title} ${badge} 
-${useToc}
+  return `# ${data.title} ${badge}
+${includeTableOfContents} 
 ## Description
 ${newDesc}
 ${includeInstallData}
