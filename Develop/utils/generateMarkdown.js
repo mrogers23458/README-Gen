@@ -78,6 +78,26 @@ function renderUsage(res) {
   console.log(res)
   return `${useUsage}`
 }
+
+//function to render contributing section
+function renderContributing(res){
+  let useContributing;
+  if (res.contributing){
+    console.log('contributing included')
+    useContributing = `## Contributing
+    ${res.contributing}`
+  } else {
+    useUsage = ''
+    console.log('no contributing included')
+  }
+  console.log(res)
+  return `${useContributing}`
+}
+//function to render tests section
+function renderTests(res){}
+//function to render questions section
+function renderQuestions(res){}
+
  //function to generate markdown for README
 function generateMarkdown(data) {
   var useToc;
@@ -101,14 +121,16 @@ function generateMarkdown(data) {
 
   const includeInstallData = renderInstall(data)
   const includeUsage = renderUsage(data)
+  const includeContributing = renderContributing(data)
   
 
-  return `# ${data.title} copyright ${badge} 
+  return `# ${data.title} ${badge} 
 ${useToc}
 ## Description
 ${newDesc}
 ${includeInstallData}
-${includeUsage}`;
+${includeUsage}
+${includeContributing}`;
 }
 
 module.exports = generateMarkdown;
