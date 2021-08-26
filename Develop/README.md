@@ -1,4 +1,4 @@
-# title [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Title [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Table of contents
 1. [Description](#Description)
 2. [Installation](#Installation)
@@ -16,9 +16,9 @@ Technology used
 4. node.js
 
 ## Purpose
-it works
+All of the things
 ## Challenges 
-all of the challenges
+some challenges
 ## Install
     install it
 ## Usage
@@ -26,7 +26,7 @@ all of the challenges
 ## Contributing
     mike,james,jill
 ## Testing Information
-    some tests
+    tests were done
 ## Questions
   github.com/mrogers23458/  
   mrogers23458@gmail.com

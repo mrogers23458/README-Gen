@@ -1,20 +1,21 @@
 //function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-  console.log(license)
+  
   if (license == 'MIT'){
+    console.log('MIT Chosen')
     return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
   }
   if (license == 'Apache 2.0'){
+    console.log('Apache Chosen')
     return '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
   }
   if (license == 'Mozilla Public 2.0'){
-    return '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)'
-  }
-  if (license == 'Mozilla Public 2.0'){
+    console.log('Mozilla Chosen')
     return '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)'
   }
   if (license == 'GNU GPL'){
+    console.log('GNU Chosen')
     return '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)'
   }
 }
@@ -25,7 +26,7 @@ function renderInstall (res) {
   let useInstall;
   if (res.install){
     console.log('install chosen')
-    useInstall = `## Install
+    useInstall = `## Installation
     ${res.install}`
   } else {
     console.log('no install chosen')
@@ -35,34 +36,37 @@ function renderInstall (res) {
   return useInstall
   
 }
-
-//function to render Description with helper
+//function to render description
 function renderDescription(res){
-  const desList = res.tech
-  const desArray = desList.map((item, i) => `${i+1}. ${item}\n`).join('')
-
-  console.log(desList)
-  console.log(desArray)
-
-  return `Technology used
+  console.log('description included')
+  if (res.helper){
+    console.log('use helper chosen')
+    const desList = res.tech
+    const desArray = desList.map((item, i) => `${i+1}. ${item}\n`).join('')
+    return `Technology used
 ${desArray}
 ## Purpose
 ${res.function}
 ## Challenges 
 ${res.challenges}`
+  } else{
+    console.log('custom description chosen')
+    return `${res.custom}`
+  }
 }
-
 //new function to render table of contents
 //if no table of contents selected return an empty string
 function renderTableOfContents(res){
 
   if(res.table){
+    console.log('table of contents included')
     const tableSections = res.sections
     const tableArray = tableSections.map((item, i) => `${i+1}. [${item}](#${item})\n`).join('')
 
     return `## Table of contents
 ${tableArray}`
   } else {
+    console.log('no table of contents included')
     return ''
   }
 }
@@ -79,7 +83,6 @@ function renderUsage(res) {
     useUsage = ''
     console.log('no usage included')
   }
-  console.log(res)
   return `${useUsage}`
 }
 
@@ -95,7 +98,6 @@ function renderContributing(res){
     useContributing = ''
     console.log('no contributing included')
   }
-  console.log(res)
   return `${useContributing}`
 }
 //function to render tests section
@@ -110,7 +112,6 @@ function renderTests(res){
     useTests = ''
     console.log('no tests included')
   }
-  console.log(res)
   return `${useTests}`
 }
 //function to render questions section
@@ -123,26 +124,17 @@ function renderQuestions(res){
   github.com/${res.questionsGit}/  
   ${res.questionsEmail}`
   } else{
+    console.log('questions section not included')
     useQuestions = ''
   }
   return useQuestions
 }
 
- //function to generate markdown for README
+//function to generate markdown for README
 function generateMarkdown(data) {
-/*   var useToc;
-  if (data.table){
-    useToc = renderTable(data) 
-  } else {useToc = ''} */
-
-  var newDesc;
-  if (data.helper){
-    newDesc = renderDescription(data)
-  } else { newDesc = data.custom}
 
   var badge; 
   if(data.license){
-    console.log(badge)
     badge = renderLicenseBadge(data.license)
   } else {
     console.log('no badge chosen')
@@ -150,18 +142,17 @@ function generateMarkdown(data) {
   }
 
   const includeTableOfContents = renderTableOfContents(data)
+  const includeDescription = renderDescription(data)
   const includeInstallData = renderInstall(data)
   const includeUsage = renderUsage(data)
   const includeContributing = renderContributing(data)
   const includeTests = renderTests(data)
   const includeQuestions = renderQuestions(data)
   
-//${useToc}
-
   return `# ${data.title} ${badge}
 ${includeTableOfContents} 
 ## Description
-${newDesc}
+${includeDescription}
 ${includeInstallData}
 ${includeUsage}
 ${includeContributing}
