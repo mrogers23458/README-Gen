@@ -1,4 +1,4 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
+//function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   console.log(license)
@@ -35,10 +35,6 @@ function renderInstall (res) {
   return useInstall
   
 }
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
 //function to render Descript with helper
 function renderDescription(res){
   const desList = res.tech
@@ -87,16 +83,39 @@ function renderContributing(res){
     useContributing = `## Contributing
     ${res.contributing}`
   } else {
-    useUsage = ''
+    useContributing = ''
     console.log('no contributing included')
   }
   console.log(res)
   return `${useContributing}`
 }
 //function to render tests section
-function renderTests(res){}
+function renderTests(res){
+  let useTests;
+  if (res.tests){
+    console.log('tests included')
+    useTests = `## Testing Information
+    ${res.tests}`
+  } else {
+    useTests = ''
+    console.log('no tests included')
+  }
+  console.log(res)
+  return `${useTests}`
+}
 //function to render questions section
-function renderQuestions(res){}
+function renderQuestions(res){
+  let useQuestions;
+  if(res.questionsGit || res.questionsEmail){
+    console.log('questions section included')
+    useQuestions = `## Questions
+  github.com/${res.questionsGit}/  
+  ${res.questionsEmail}`
+  } else{
+    useQuestions = ''
+  }
+  return useQuestions
+}
 
  //function to generate markdown for README
 function generateMarkdown(data) {
@@ -122,6 +141,8 @@ function generateMarkdown(data) {
   const includeInstallData = renderInstall(data)
   const includeUsage = renderUsage(data)
   const includeContributing = renderContributing(data)
+  const includeTests = renderTests(data)
+  const includeQuestions = renderQuestions(data)
   
 
   return `# ${data.title} ${badge} 
@@ -130,7 +151,9 @@ ${useToc}
 ${newDesc}
 ${includeInstallData}
 ${includeUsage}
-${includeContributing}`;
+${includeContributing}
+${includeTests}
+${includeQuestions}`;
 }
 
 module.exports = generateMarkdown;
