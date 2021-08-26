@@ -1,27 +1,42 @@
 //function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {
+function renderLicenseBadge(res) {
   
-  if (license == 'MIT'){
+  if (res.license == 'MIT'){
     console.log('MIT Chosen')
     return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
-  }
-  if (license == 'Apache 2.0'){
+  } 
+  if (res.license == 'Apache 2.0'){
     console.log('Apache Chosen')
     return '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
   }
-  if (license == 'Mozilla Public 2.0'){
+  if (res.license == 'Mozilla Public 2.0'){
     console.log('Mozilla Chosen')
     return '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)'
   }
-  if (license == 'GNU GPL'){
+  if (res.license == 'GNU GPL'){
     console.log('GNU Chosen')
     return '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)'
+  }
+
+  if(!res.license){
+    return ''
+  }
+
+}
+//function that returns licesnesing information based on license chosen
+//If there is no license, return and empty string
+function renderLicenseInfo(res){
+  if (res.license){
+    return `## License
+**Note: This project is covered under ${res.license}**`
+  } else {
+    return ''
   }
 }
 
 //function that returns the installation instructions
-// If there is no license, return an empty string
+// If there is no installation, return an empty string
 function renderInstall (res) {
   let useInstall;
   if (res.install){
@@ -133,14 +148,6 @@ function renderQuestions(res){
 //function to generate markdown for README
 function generateMarkdown(data) {
 
-  var badge; 
-  if(data.license){
-    badge = renderLicenseBadge(data.license)
-  } else {
-    console.log('no badge chosen')
-    badge = ''
-  }
-
   const includeTableOfContents = renderTableOfContents(data)
   const includeDescription = renderDescription(data)
   const includeInstallData = renderInstall(data)
@@ -148,13 +155,16 @@ function generateMarkdown(data) {
   const includeContributing = renderContributing(data)
   const includeTests = renderTests(data)
   const includeQuestions = renderQuestions(data)
+  const includeLicenseInfo = renderLicenseInfo(data)
+  const includeBadge = renderLicenseBadge(data)
   
-  return `# ${data.title} ${badge}
+  return `# ${data.title} ${includeBadge}
 ${includeTableOfContents} 
 ## Description
 ${includeDescription}
 ${includeInstallData}
 ${includeUsage}
+${includeLicenseInfo}
 ${includeContributing}
 ${includeTests}
 ${includeQuestions}`;

@@ -1,11 +1,10 @@
-// TODO: Include packages needed for this application
+//packages needed for this application
 const iq = require('inquirer')
 const fs = require('fs')
 const util = require('util')
 const generateMarkdown = require('./utils/generateMarkdown')
-//prompt sections
 
-// TODO: Create an array of questions for user input
+//array of questions for user input
 const questions = [
     {
         type: 'input',
@@ -73,7 +72,7 @@ const questions = [
             return answers.sections && answers.sections.includes(validate)
         }
     },{
-        type: 'checkbox',
+        type: 'list',
         name: 'license',
         message: 'which license would you like to use?',
         choices: ['MIT', 'Apache 2.0', 'Mozilla Public 2.0', 'GNU GPL'],
