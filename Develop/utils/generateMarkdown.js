@@ -1,12 +1,21 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-  if (license === 'MIT'){
-    console.log('MIT chosen')
+  console.log(license)
+  if (license == 'MIT'){
+    return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
   }
-
-  if (license === 'Apache'){
-    console.log('Apache chosen')
+  if (license == 'Apache 2.0'){
+    return '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
+  }
+  if (license == 'Mozilla Public 2.0'){
+    return '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)'
+  }
+  if (license == 'Mozilla Public 2.0'){
+    return '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)'
+  }
+  if (license == 'GNU GPL'){
+    return '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)'
   }
 }
 
@@ -27,7 +36,7 @@ function renderDescription(res){
 
   return `Technology used
 ${desArray}
-## What does it do?
+## Purpose
 ${res.function}
 ## Challenges 
 ${res.challenges}`
@@ -53,11 +62,15 @@ function generateMarkdown(data) {
     newDesc = renderDescription(data)
   } else { newDesc = data.custom}
 
+  var badge = renderLicenseBadge(data.license)
+  console.log(badge)
 
-  return `# ${data.title}
+  return `# ${data.title} ${badge} 
 ${useToc}
 ## Description
-${newDesc}`;
+${newDesc}
+## Install
+${data.install}`;
 }
 
 module.exports = generateMarkdown;
