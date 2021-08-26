@@ -76,7 +76,7 @@ const questions = [
         type: 'checkbox',
         name: 'license',
         message: 'which license would you like to use?',
-        choices: ['MIT', 'Apache 2.0', 'Mozilla Public 2.0', 'CDDL'],
+        choices: ['MIT', 'Apache 2.0', 'Mozilla Public 2.0', 'GNU GPL'],
         when (answers) {
             let validate = 'License'
             return answers.sections && answers.sections.includes(validate)

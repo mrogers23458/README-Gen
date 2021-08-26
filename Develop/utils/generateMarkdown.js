@@ -19,9 +19,22 @@ function renderLicenseBadge(license) {
   }
 }
 
-// TODO: Create a function that returns the license link
+//function that returns the installation instructions
 // If there is no license, return an empty string
-function renderLicenseLink(license) {}
+function renderInstall (res) {
+  let useInstall;
+  if (res.install){
+    console.log('install chosen')
+    useInstall = `## Install
+    ${res.install}`
+  } else {
+    console.log('no install chosen')
+    useInstall = ''
+  }
+  console.log(useInstall)
+  return useInstall
+  
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
@@ -50,7 +63,22 @@ function renderTable(res){
   return `## Table of contents
 ${tableArray}`
 }
-// TODO: Create a function to generate markdown for README
+
+//function to render usage section
+function renderUsage(res) {
+  let useUsage;
+  if (res.usage){
+    console.log('usage included')
+    useUsage = `## Usage
+    ${res.usage}`
+  } else {
+    useUsage = ''
+    console.log('no usage included')
+  }
+  console.log(res)
+  return `${useUsage}`
+}
+ //function to generate markdown for README
 function generateMarkdown(data) {
   var useToc;
   if (data.table){
@@ -62,15 +90,25 @@ function generateMarkdown(data) {
     newDesc = renderDescription(data)
   } else { newDesc = data.custom}
 
-  var badge = renderLicenseBadge(data.license)
-  console.log(badge)
+  var badge; 
+  if(data.license){
+    console.log(badge)
+    badge = renderLicenseBadge(data.license)
+  } else {
+    console.log('no badge chosen')
+    badge = ''
+  }
 
-  return `# ${data.title} ${badge} 
+  const includeInstallData = renderInstall(data)
+  const includeUsage = renderUsage(data)
+  
+
+  return `# ${data.title} copyright ${badge} 
 ${useToc}
 ## Description
 ${newDesc}
-## Install
-${data.install}`;
+${includeInstallData}
+${includeUsage}`;
 }
 
 module.exports = generateMarkdown;
