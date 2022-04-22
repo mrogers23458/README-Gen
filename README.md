@@ -1,4 +1,4 @@
-# Node SQL Employee Management System [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# ReadME Generator [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Table of contents
 1. [Description](#Description)
 2. [Installation](#Installation)
@@ -12,9 +12,8 @@ Technology used
 2. node.js
 
 ## Purpose
-This application takes input from the user, and allows them to do basic employee managment. Open starting the application the user may view all departments, view all roles, view all employees, add a department, add a role, add an employee, or update an employee role. It leverages javascript, inquirer and mysql2 package to create a functioning application to access mysql database tables.
-## Challenges 
-The biggest challenge for me in making this app was the need to be precise with mysql queries. Javascript tends to be a lot more flexible in it's structure compared to mysql. While mysql follows a well thought out and developed logic, it is exacting in nature. By studying the language, and the documnetation I was able to overcome this challenge.
+The purpose of this application was to create a way to easily generate README.md for project files. This readme was generated with this application.
+
 ## Installation
     To install-  1) Clone the repository  2) install npm dependencies with npm -i  3) run the index.js file with node index.js  
 ## Usage
